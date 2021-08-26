@@ -22,7 +22,7 @@
                     <div class="columns is-centered">
                         <div class="column is-one-third">
                             {{form.buyer_name}}
-                        </div>
+                        </div> 
 
                         <div class="column is-one-third">
                             {{form.buyer_phone}}
@@ -51,6 +51,7 @@
                                     <th>AMOUNT$</th>
                                     <th>TAX</th>
                                     <th>ADD</th>
+                                    <th>DOWNLOAD</th>
                                 </tr>
                                 {{ formset.management_form }}
                                 {% for form in formset %}
@@ -67,7 +68,14 @@
                                                 class="button is-small btn btn-success add-form-row">+</button>&nbsp;
                                             <!-- <button class="button is-small btn btn-warning remove-form-row">-</button> -->
                                         </div>
+                                      
                                     </td>
+                                    {% for invoice in invoices %}
+                                    <td>
+                                        <a href="{% url 'invoice:invoice-download' id=invoice.id %}">Download</a>
+                                    </td>
+                                    {% endfor %}
+                                    
                                 </tr>
                                 {% endfor %}
                             </thead>
@@ -76,7 +84,11 @@
                     </table>
                     <div class="row spacer">
                         <div class="col-4 offset-2">
-                            <button type="submit" class="button btn btn-block is-info is-half">Create</button>
+                            <button type="submit" class="button btn btn-block is-info is-half">Download
+                                {% for invoice in invoices %}
+                                <a href="{% url 'invoice:invoice-download' id=invoice.id %}">Download</a>
+                                {% endfor %}
+                            </button>
                         </div>
                     </div>
                     <br>

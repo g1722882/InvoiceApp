@@ -6,7 +6,7 @@ from .models import LineItem, Invoice
 from .forms import LineItemFormset, InvoiceForm
 from xhtml2pdf import pisa
 
-
+"""
 class InvoiceListView(View):
     def get(self, *args, **kwargs):
         invoices = Invoice.objects.all()
@@ -29,7 +29,7 @@ class InvoiceListView(View):
         else:
             invoices.update(status=True)
 
-        return redirect('invoice:invoice-list')
+        return redirect('invoice:invoice-list')"""
 
 def createInvoice(request):
     """
@@ -53,7 +53,6 @@ def createInvoice(request):
                     seller_billing_address = form.data["seller_billing_address"],
                     buyer_billing_address = form.data["buyer_billing_address"],
                     date=form.data["date"],
-                    due_date=form.data["due_date"], 
                     )
             # invoice.save()
             
@@ -117,7 +116,7 @@ def render_pdf_view(request, id):
     # find the template and render it.
     template = get_template(template_path)
     html = template.render(context)
-
+ 
     # create a pdf
     pisa_status = pisa.CreatePDF(
        html, dest=response)

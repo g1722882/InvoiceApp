@@ -14,13 +14,13 @@ class Invoice(models.Model):
     def __str__(self):
         return str(self.buyer_name)
         return str(self.seller_name)
-    
+     
     def get_status(self):
         return self.status
 
     def save(self, *args, **kwargs):
         if not self.id:             
-            self.due_date = datetime.datetime.now()+ datetime.timedelta(days=15)
+            self.date = datetime.datetime.now()+ datetime.timedelta(days=15)
         return super(Invoice, self).save(*args, **kwargs)
 
 class LineItem(models.Model):
