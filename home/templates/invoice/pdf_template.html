@@ -1,0 +1,67 @@
+<!DOCTYPE html>{% load static%}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>View Document</title>
+    <link rel="stylesheet" href="{%static 'css/invoice-template-1.css' %}" media="all" />
+  </head>
+  <body>
+    <header class="clearfix">
+    </header>
+    <main>
+      <div id="details" class="clearfix">
+        <div id="client">
+          <div class="to">INVOICE TO:</div>
+          <h2 class="name">{{buyer_name}}</h2>
+          <div class="address">{{billing_address}}</div>
+          <div class="email"><a href="mailto:{{customer_email}}">{{customer_email}}</a></div>
+        </div>
+        <div id="invoice">
+          <div class="date">Date of Invoice: {{date}}</div>
+          <div class="date">Due Date: {{due_date}}</div>
+        </div>
+      </div>
+      <table border="0" cellspacing="0" cellpadding="0">
+        <thead>
+          <tr>
+            <th class="no">S.No.</th>
+            <th class="desc">PRODUCT</th>
+            <th class="unit">RATE</th>
+            <th class="qty">QUANTITY</th>
+            <th class="total">TOTAL</th>
+          </tr>
+        </thead>
+        <tbody>
+			{% for item in lineitem %}
+          <tr>
+            <td class="no">{{forloop.counter}}</td>
+            <td class="desc">{{item.description}}</td>
+            <td class="unit">${{item.rate}}</td>
+            <td class="qty">{{item.quantity}}</td>
+            <td class="total">${{item.amount}}</td>
+		  </tr>
+		  {% endfor %}
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="2"></td>
+            <td colspan="2">SUBTOTAL</td>
+            <td>${{invoice_total}}</td>
+          </tr>
+          <tr>
+            <td colspan="2"></td>
+            <td colspan="2">TAX 0%</td>
+            <td>${{invoice_total}}</td>
+          </tr>
+          <tr>
+            <td colspan="2"></td>
+            <td colspan="2">GRAND TOTAL</td>
+            <td>${{invoice_total}}</td>
+          </tr>
+        </tfoot>
+      </table>
+      <div id="thanks">Thank you!</div>
+    </main>
+  
+  </body>
+</html>
